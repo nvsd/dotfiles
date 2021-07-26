@@ -83,6 +83,12 @@ endif
 
 runtime ./maps.vim
 
+" Plugin Commands
+" ---------------------------------------------------------------------
+
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
+
 " Syntax theme
 " ---------------------------------------------------------------------
 

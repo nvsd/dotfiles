@@ -23,6 +23,7 @@ if has("nvim")
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'haishanh/night-owl.vim'
+  Plug 'preservim/nerdtree'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }

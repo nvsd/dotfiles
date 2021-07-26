@@ -1,5 +1,8 @@
 " Description: Keymaps
+
+" General
 inoremap jk <Esc>
+let mapleader = "'"
 
 "-----------------------------
 " Tabs
@@ -16,3 +19,8 @@ nmap <Tab> :tabnext<Return>
 nmap ss :split<Return><C-w>w
 nmap sv :vsplit<Return><C-w>w
 
+" NerdTree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
