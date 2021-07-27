@@ -7,6 +7,9 @@ call plug#begin()
 Plug 'cohama/lexima.vim'
 
 if has("nvim")
+	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+	Plug 'junegunn/fzf.vim'
+	Plug 'tpope/vim-vinegar'
   Plug 'rktjmp/lush.nvim'
   Plug 'hoob3rt/lualine.nvim'
   Plug 'neovim/nvim-lspconfig'
@@ -17,7 +20,6 @@ if has("nvim")
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
   Plug 'haishanh/night-owl.vim'
 endif
 

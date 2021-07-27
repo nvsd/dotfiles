@@ -21,3 +21,10 @@ nmap <Tab> :tabnext<Return>
 nmap ss :split<Return><C-w>w
 nmap sv :vsplit<Return><C-w>w
 
+" Vim Config
+nnoremap <silent><leader>1 :source ~/.config/nvim/init.vim \| :PlugInstall<CR>
+
+" FZF
+
+nnoremap <C-p> :GFiles<Cr>
+nnoremap <silent><leader>l :Buffers<CR>
