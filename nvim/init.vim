@@ -16,26 +16,13 @@ set encoding=utf-8
 set title
 set autoindent
 set background=dark
-set showcmd
-set cmdheight=1
-set laststatus=2
-set scrolloff=10
-set expandtab
-"let loaded_matchparen = 1
 " incremental substitution (neovim)
 if has('nvim')
   set inccommand=split
 endif
 
-" Suppress appending <PasteStart> and <PasteEnd> when pasting
-set t_BE=
-
-set nosc noru nosm
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
-"set showmatch
-" How many tenths of a second to blink when matching brackets
-"set mat=2
 " Ignore case when searching
 set ignorecase
 " Be smart when using tabs ;)
@@ -82,12 +69,6 @@ if has("unix")
 endif
 
 runtime ./maps.vim
-
-" Plugin Commands
-" ---------------------------------------------------------------------
-
-" Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
 
 " Syntax theme
 " ---------------------------------------------------------------------
