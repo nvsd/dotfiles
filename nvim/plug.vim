@@ -21,6 +21,11 @@ if has("nvim")
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'haishanh/night-owl.vim'
+	Plug 'prettier/vim-prettier', {
+ 		\ 'do': 'yarn install',
+  	\ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] 
+	}
+
 endif
 
 call plug#end()
