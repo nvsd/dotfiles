@@ -16,6 +16,7 @@ alias che='chezmoi'
 
 alias changevim="nvim ~/.config/nvim/init.lua"
 alias wez="nvim ~/.wezterm.lua"
+alias dot="z dotfiles"
 
 # Git
 alias pull="git fetch origin main:main"
