@@ -1,0 +1,5 @@
+name: lifted
+root: ~/Projects/lifted
+windows:
+  - editor: nvim .
+  - utils:

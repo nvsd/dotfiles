@@ -17,6 +17,16 @@ return {
 		local lspconfig = require("lspconfig")
 		local telescope = require('telescope.builtin')
 
+		local MY_FQBN = "arduino:avr:nano"
+		lspconfig.arduino_language_server.setup {
+			filetypes = { "ino", "cpp", "h" },
+			cmd = {
+				"arduino-language-server",
+				"-cli-config", "~/arduino-cli.yaml",
+				"-fqbn",
+				MY_FQBN
+			}
+		}
 		require('luasnip.loaders.from_vscode').lazy_load()
 		lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 

@@ -1,0 +1,8 @@
+# /Users/zack/.config/tmuxinator/tracker.yml
+
+name: tracker
+root: ~/Projects/tracker
+
+windows:
+  - editor: nvim .
+  - util:

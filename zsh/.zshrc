@@ -1,6 +1,8 @@
-source /opt/homebrew/opt/spaceship/spaceship.zsh
 # Git auto-complete
 autoload -Uz compinit && compinit
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=$PATH:$HOME/.local/bin
 
 alias db:psql="psql postgresql://postgres:postgres@localhost:5432"
 alias db="pgcli postgresql://postgres:postgres@localhost:5432"
@@ -17,6 +19,7 @@ alias che='chezmoi'
 alias changevim="nvim ~/.config/nvim/init.lua"
 alias wez="nvim ~/.wezterm.lua"
 alias dot="z dotfiles"
+alias ard="arduino-cli"
 
 # Git
 alias pull="git fetch origin main:main"
@@ -29,14 +32,22 @@ alias update="source ~/.zshrc"
 
 export EDITOR='nvim'
 
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH=/Users/zacknovosad/.nvm/versions/node/v20.0.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/zacknovosad/.nvm/versions/node/v20.0.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/zacknovosad/.cargo/bin:/Users/zacknovosad/.dotnet:/Users/zacknovosad/.dotnet/tools:/Users/zacknovosad/.dotnet:/Users/zacknovosad/.dotnet/tools:~/Projects/nand2tetris/tools
-
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 eval "$(zoxide init zsh)"
+
+source /opt/homebrew/opt/spaceship/spaceship.zsh
+
+# pnpm
+export PNPM_HOME="/Users/zack/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
