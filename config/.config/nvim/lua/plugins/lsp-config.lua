@@ -17,6 +17,19 @@ return {
 		local lspconfig = require("lspconfig")
 		local telescope = require('telescope.builtin')
 
+		lspconfig.tailwindcss.setup({
+				settings = {
+				tailwindCSS = {
+					experimental = {
+						classRegex = {
+							{ "cva\\(([^)]*)\\)",
+							 "[\"'`]([^\"'`]*).*?[\"'`]" },
+						},
+					},
+				},
+			},
+		})
+
 		local MY_FQBN = "arduino:avr:nano"
 		lspconfig.arduino_language_server.setup {
 			filetypes = { "ino", "cpp", "h" },
@@ -59,6 +72,17 @@ return {
 			vim.api.nvim_command('cfirst') -- or maybe you want 'copen' instead of 'cfirst'
 		end
 
+		local lsp_formatting = function(bufnr)
+			vim.lsp.buf.format({
+				filter = function(client)
+					return client.name == "null-ls"
+				end,
+				bufnr = bufnr,
+			})
+		end
+
+		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 		lsp.on_attach(function(client, bufnr)
 			local nmap = function(keys, func, desc)
 				vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
@@ -76,9 +100,16 @@ return {
 
 			local bufopts = { noremap = true, silent = true, buffer = bufnr }
 			vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition { on_list = on_list } end, bufopts)
-
-
-			lsp.buffer_autoformat()
+			if client.supports_method("textDocument/formatting") then
+				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					group = augroup,
+					buffer = bufnr,
+					callback = function()
+						lsp_formatting(bufnr)
+					end,
+				})
+			end
 		end)
 
 		vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
