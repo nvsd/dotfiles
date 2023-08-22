@@ -3,3 +3,4 @@ root: ~/Projects/lifted
 windows:
   - editor: nvim .
   - utils:
+  - native: yarn native dev

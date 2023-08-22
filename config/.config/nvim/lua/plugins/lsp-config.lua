@@ -17,32 +17,6 @@ return {
 		local lspconfig = require("lspconfig")
 		local telescope = require('telescope.builtin')
 
-		lspconfig.tailwindcss.setup({
-				settings = {
-				tailwindCSS = {
-					experimental = {
-						classRegex = {
-							{ "cva\\(([^)]*)\\)",
-							 "[\"'`]([^\"'`]*).*?[\"'`]" },
-						},
-					},
-				},
-			},
-		})
-
-		local MY_FQBN = "arduino:avr:nano"
-		lspconfig.arduino_language_server.setup {
-			filetypes = { "ino", "cpp", "h" },
-			cmd = {
-				"arduino-language-server",
-				"-cli-config", "~/arduino-cli.yaml",
-				"-fqbn",
-				MY_FQBN
-			}
-		}
-		require('luasnip.loaders.from_vscode').lazy_load()
-		lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-
 		local function filter(arr, fn)
 			if type(arr) ~= "table" then
 				return arr
@@ -72,15 +46,6 @@ return {
 			vim.api.nvim_command('cfirst') -- or maybe you want 'copen' instead of 'cfirst'
 		end
 
-		local lsp_formatting = function(bufnr)
-			vim.lsp.buf.format({
-				filter = function(client)
-					return client.name == "null-ls"
-				end,
-				bufnr = bufnr,
-			})
-		end
-
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 		lsp.on_attach(function(client, bufnr)
@@ -100,22 +65,31 @@ return {
 
 			local bufopts = { noremap = true, silent = true, buffer = bufnr }
 			vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition { on_list = on_list } end, bufopts)
-			if client.supports_method("textDocument/formatting") then
-				vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					group = augroup,
-					buffer = bufnr,
-					callback = function()
-						lsp_formatting(bufnr)
-					end,
-				})
-			end
 		end)
 
 		vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
 			vim.lsp.diagnostic.on_publish_diagnostics,
 			{ update_in_insert = true }
 		)
+
+
+		lsp.on_attach(function(client, bufnr)
+			lsp.default_keymaps({buffer = bufnr})
+		end)
+
+		lsp.format_on_save({
+			format_opts = {
+				async = false,
+				timeout_ms = 10000,
+			},
+			servers = {
+				['lua_ls'] = {'lua'},
+				['rust_analyzer'] = {'rust'},
+				['null-ls'] = {'javascript', 'typescript'},
+			}
+		})
+
+lsp.setup()
 
 
 		lsp.setup()
