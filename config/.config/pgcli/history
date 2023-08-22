@@ -376,3 +376,45 @@
 
 # 2023-08-22 02:03:54.821134
 +exit
+
+# 2023-08-22 02:51:58.176109
++drop database dev;
+
+# 2023-08-22 02:52:04.267644
++SELECT id
++        , cycle_id
++        , day_of_week
++        , description
++        , name
++        , rest_timer
++        , routine_id
++        , sequence_number
++        , user_id
++        , created_at
++        , updated_at
++        FROM workout
++        WHERE routine_id="123"
++        AND
++        WHERE user_id="123";
++
+
+# 2023-08-22 02:52:18.606922
++drop database dev;
+
+# 2023-08-22 02:53:05.504040
++\q
+
+# 2023-08-22 02:53:13.406602
++drop database dev;
+
+# 2023-08-22 02:54:08.927375
++\q
+
+# 2023-08-22 02:54:12.914051
++drop database dev;
+
+# 2023-08-22 02:54:28.053123
++create database dev;
+
+# 2023-08-22 02:54:32.401588
++\q
