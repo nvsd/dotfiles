@@ -1,6 +1,0 @@
-name: api
-root: ~/Projects/workout-api
-windows:
-  - editor: nvim .
-  - utils:
-  - server: cargo run

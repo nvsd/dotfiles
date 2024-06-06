@@ -1,7 +1,0 @@
-name: trainer
-root: ~/Projects/trainer
-
-windows:
-  - editor: nvim .
-  - util:
-  - server:
